@@ -1,0 +1,49 @@
+/* General body styles */
+body {
+    background-color: gray;
+}
+
+/* Centering text */
+.one {
+    text-align: center;
+}
+
+/* Common styles for boxes */
+.box {
+    width: 30%;
+    height: 130px;
+    padding: 30px;
+    margin: 10px auto; /* Center the boxes horizontally */
+}
+
+/* Specific styles for each box */
+.ins {
+    background-color: blueviolet;
+}
+
+.del {
+    background-color: red;
+}
+
+.dis {
+    background-color: brown;
+}
+
+.updt {
+    background-color: mediumspringgreen;
+}
+
+/* Flexbox container for layout */
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Space between items */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .box {
+        width: 90%; /* Make boxes take full width on smaller screens */
+    }
+}

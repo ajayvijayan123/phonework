@@ -1,0 +1,296 @@
+{% load static %}
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Document Title</title>
+</head>
+<style>
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f3f4f6, #e0e0e0);
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Main Container */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* Header Styling */
+.heading {
+    font-size: 40px;
+    font-weight: 600;
+    color: #3F51B5; /* Indigo color */
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Form Section Styling */
+.form-section, .table-section, .delete-section, .update-section {
+    margin-bottom: 40px;
+}
+
+/* Form Input and Labels */
+label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #009688; /* Teal */
+}
+
+input[type="text"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #009688;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus {
+    border-color: #004d40;
+}
+
+input[type="submit"] {
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: #3F51B5; /* Indigo */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+input[type="submit"]:hover {
+    background-color: #303f9f; /* Darker Indigo */
+    transform: translateY(-2px);
+}
+
+/* Button Hover Effects */
+.btn:hover {
+    background-color: #004d40;
+    transform: translateY(-3px);
+}
+
+/* Individual Button Styling */
+.insert-btn {
+    background-color: #2196F3; /* Blue */
+}
+
+.insert-btn:hover {
+    background-color: #1976D2;
+}
+
+.display-btn {
+    background-color: #FFC107; /* Amber */
+}
+
+.display-btn:hover {
+    background-color: #FF9800;
+}
+
+.delete-btn {
+    background-color: #f44336; /* Red */
+}
+
+.delete-btn:hover {
+    background-color: #e53935;
+}
+
+.update-btn {
+    background-color: #8bc34a; /* Light Green */
+}
+
+.update-btn:hover {
+    background-color: #7cb342;
+}
+
+/* Table Styling */
+.phone-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+
+.phone-table th, .phone-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+}
+
+.phone-table th {
+    background-color: #009688; /* Teal */
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.phone-table td {
+    font-size: 16px;
+}
+
+.phone-table tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+.phone-table tr:hover {
+    background-color: #e0f2f1;
+    transition: background-color 0.3s ease;
+}
+
+/* Section Styling */
+section {
+    margin-bottom: 40px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .heading {
+        font-size: 32px;
+    }
+
+    .form-section, .table-section, .delete-section, .update-section {
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 8px 18px;
+    }
+
+    .phone-table th, .phone-table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .insert-btn, .delete-btn, .update-btn {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}
+
+/* Adding Animation on Page Load */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation on Form */
+.form-section, .table-section, .delete-section, .update-section {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Form Input Validation Styles */
+input[type="text"]:invalid {
+    border-color: #f44336;
+}
+
+input[type="text"]:valid {
+    border-color: #4CAF50;
+}
+
+/* Tooltip Styling for Form Inputs */
+input[type="text"]:focus::placeholder {
+    color: #004d40;
+}
+
+/* Placeholder Text Styling */
+input[type="text"]::placeholder {
+    font-style: italic;
+    color: #757575;
+}
+
+</style>
+<body>
+    <h1 class="one">Phone work</h1>
+    <div class="ins">
+        <form action="{% url 'addphone' %}" class="insert" method="POST">  <!-- Use URL name -->
+            {% csrf_token %}      
+            <label for="">Name</label>
+            <input type="text" name="name" required><br><br>
+            <label for="">Phone</label>
+            <input type="text" name="phone" required><br>  <!-- Changed to text -->
+            <input type="submit" name="btn" value="insert" class="btn1">
+            {{ key }}   
+        </form>
+    </div>
+   
+
+    <div class="dis">
+ <form action="{% url 'display' %}" method="get">
+    <input type="submit" value="Display" class="btn2">
+</form>
+
+<table border="1">
+    <tr>
+        <td>Name</td>
+        <td>Phone</td>
+    </tr>
+    {% for i in phn %}
+    <tr>
+        <td>{{ i.name }}</td>
+        <td>{{ i.phone }}</td>
+    </tr>
+    {% endfor %}
+</table>
+    </div><br>
+
+    <div class="del">
+        <form action="{% url 'delete' %}" method="POST" class="delete">
+            {% csrf_token %}
+            Enter Name to Delete
+            <input type="text" name="name" required><br>
+            <input type="submit" value="Delete" class="btn3">
+            {{ key1 }}
+        </form>
+    </div>
+    <div class="updt">
+        <form action="{% url 'update' %}" method="POST" class="up">
+            {% csrf_token %}
+            <label for="">Old Name</label>
+            <input type="text" name="oldname" required><br><br>
+            <label for="">New Name</label>
+            <input type="text" name="newname" required><br>
+            <input type="submit" value="Update" class="btn4"><br>
+            {{ key2 }}  <!-- Display any messages here -->
+        </form>
+    </div>
+</body>
+</html>
